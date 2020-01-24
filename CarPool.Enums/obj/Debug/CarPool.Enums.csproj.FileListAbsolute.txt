@@ -1,0 +1,2 @@
+C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Enums\obj\Debug\CarPool.Enums.csprojAssemblyReference.cache
+C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Enums\obj\Debug\CarPool.Enums.csproj.CoreCompileInputs.cache
