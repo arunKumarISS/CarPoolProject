@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 using CarPool.Services;
 using CarPool.Model;
 using CarPool.Enums;
-
 using System.IO;
 
-namespace CarPool
+namespace CarPool.Program
 {
-    public class Program
+    public class Presentaion
     {
-        public static void Main(string[] args)
+        public static void Presentation()
         {
             DatabaseService DatabaseService = new DatabaseService();
             UserService UserService = new UserService();
