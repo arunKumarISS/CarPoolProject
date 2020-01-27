@@ -43,15 +43,23 @@ namespace CarPool.Services
             return true;
         }
 
-        public List<Offer> DisplayActiveOffers(string fromLocation, string toLocation, int numberOfPassengers)
+        public List<Offer> GetActiveOffers(Location fromLocation, Location toLocation, int numberOfPassengers)
         {
+            int Count1, Count2;
             List<Offer> ActiveOffers = new List<Offer>();
-            foreach (var offer in DataBase.Offers)
+            foreach(var offer in DataBase.Offers)
             {
-                if (offer.FromLocation.Equals(fromLocation) && offer.ToLocation.Equals(toLocation) && offer.Status.Equals(IEnums.OfferStatus.Active) && offer.Availability >= numberOfPassengers)
+                Count1 = 0;
+                Count2 = 0;
+                foreach (var location in offer.ViaPoints)
                 {
-                    ActiveOffers.Add(offer);
+                    if (location.Equals(fromLocation))
+                        Count1 = 1;
+                    if (location.Equals(toLocation))
+                        Count2 = 2;
                 }
+                if (Count1 == 1 && Count2 == 2)
+                    ActiveOffers.Add(offer);
             }
             return ActiveOffers;
         }
@@ -84,7 +92,8 @@ namespace CarPool.Services
 
         public void AddViaPoint(Offer offer, IEnums.LocationIndex locationIndex)
         {
-            foreach(var location in DataBase.Locations)
+            
+            foreach (var location in DataBase.Locations)
             {
                 if(location.Index.Equals(locationIndex))
                 {
@@ -119,7 +128,7 @@ namespace CarPool.Services
             return null;
         }
 
-        public List<Offer> DisplayOffersHistory(string userId)
+        public List<Offer> GetOffersHistory(string userId)
         {
             List<Offer> AllOffers = new List<Offer>();
             foreach (var offer in DataBase.Offers)

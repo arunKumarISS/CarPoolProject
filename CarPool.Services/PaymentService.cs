@@ -65,7 +65,7 @@ namespace CarPool.Services
                 return true;
         }
 
-        public List<Payment> DisplayPendingDues(string userId)
+        public List<Payment> GetPendingDues(string userId)
         {
             List<Payment> PendingDues = new List<Payment>();
             foreach(var payment in DataBase.Payments)
@@ -78,7 +78,7 @@ namespace CarPool.Services
             return PendingDues;
         }
 
-        public List<Payment> DisplayPaymentHistory(string UserId)
+        public List<Payment> GetPaymentHistory(string UserId)
         {
             List<Payment> AllPayments = new List<Payment>();
             foreach(var payment in DataBase.Payments)

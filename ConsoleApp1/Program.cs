@@ -7,18 +7,35 @@ using CarPool.Services;
 using CarPool.Model;
 using CarPool.Enums;
 
+using System.IO;
+
 namespace CarPool
 {
     public class Program
     {
         public static void Main(string[] args)
         {
+            DatabaseService DatabaseService = new DatabaseService();
             UserService UserService = new UserService();
             BookingService BookingService = new BookingService();
             OfferService OfferService = new OfferService();
             OfferRequestService OfferRequestService = new OfferRequestService();
             PaymentService PaymentService = new PaymentService();
             LocationService LocationService = new LocationService();
+            DatabaseService.MoveDataToJson();
+            DatabaseService.GetDataFromJson();
+            LocationService.AddLocation("MIYAPUR", 17.512510, 78.352226);
+            LocationService.AddLocation("MADHAPUR", 17.448294, 78.391487);
+            LocationService.AddLocation("KOTI", 17.385042, 78.485753);
+            LocationService.AddLocation("AMEERPET", 17.437462, 78.448288);
+            LocationService.AddLocation("JUBILEE HILLS", 17.426161, 78.412537);
+            LocationService.AddLocation("HITECH CITY", 17.445190, 78.385117);
+            LocationService.AddLocation("LINGAMPALLY", 17.487400, 78.314453);
+            LocationService.AddLocation("DILSUKHNAGAR", 17.361718, 78.525805);
+            LocationService.AddLocation("LB NAGAR", 17.352533, 78.555088);
+            LocationService.AddLocation("BACHUPALLY", 17.526719, 78.354426);
+            
+
             while (true)
             {
             Login:
@@ -98,7 +115,7 @@ namespace CarPool
                                                         {
                                                             Console.WriteLine("number of passengers:");
                                                             int NumberOfPassengers = Convert.ToInt32(Console.ReadLine());
-                                                            List<Offer> ActiveOffers = OfferService.DisplayActiveOffers(PickUpLocation.ToUpper(), Destination.ToUpper(), NumberOfPassengers);
+                                                            List<Offer> ActiveOffers = OfferService.GetActiveOffers(FromLocation, ToLocation, NumberOfPassengers);
                                                             if (ActiveOffers.Count == 0)
                                                                 Console.WriteLine("no active offers");
                                                             else
@@ -127,7 +144,7 @@ namespace CarPool
                                                     IEnums.PaymentDecision Decision = (IEnums.PaymentDecision)Convert.ToInt32(Console.ReadLine());
                                                     if (Decision.Equals(IEnums.PaymentDecision.Now))
                                                     {
-                                                        List<Payment> PaymentDues = PaymentService.DisplayPendingDues(UserId);
+                                                        List<Payment> PaymentDues = PaymentService.GetPendingDues(UserId);
                                                         foreach (var payment in PaymentDues)
                                                         {
                                                             Console.WriteLine("BookingId: " + payment.PaymentID + ", amount to be paid: " + payment.Fair);
@@ -182,6 +199,7 @@ namespace CarPool
                                                             List<Location> ViaPoints = LocationService.GetViaPoints(StartPoint, EndPoint);
                                                             if (ViaPoints.Count != 0)
                                                             {
+                                                                Offer.ViaPoints.Add(StartPoint);
                                                                 int SelectViaPoint = 0;
                                                                 do
                                                                 {
@@ -196,7 +214,7 @@ namespace CarPool
                                                                     IEnums.LocationIndex LocationIndex = (IEnums.LocationIndex)SelectViaPoint;
                                                                     OfferService.AddViaPoint(Offer, LocationIndex);
                                                                 } while (SelectViaPoint != 0);
-
+                                                                Offer.ViaPoints.Add(EndPoint);
                                                                 Console.WriteLine("offer created successfully!!");
                                                             }
                                                             else
@@ -223,7 +241,7 @@ namespace CarPool
                                             {
                                                 if (OfferRequestService.AnyOfferRequest(UserId))
                                                 {
-                                                    List<OfferRequest> OfferRequests = OfferRequestService.DisplayOfferRequests(UserId);
+                                                    List<OfferRequest> OfferRequests = OfferRequestService.GetOfferRequests(UserId);
                                                     foreach (var offerRequest in OfferRequests)
                                                         Console.WriteLine("RequestId: " + offerRequest.RequestId + " from " + offerRequest.FromLocation + " to " + offerRequest.ToLocation);
                                                     Console.WriteLine("enter the RequestId to accept or reject offer request");
@@ -238,7 +256,7 @@ namespace CarPool
                                             }
                                         case IEnums.UserOptions.DisplayBookingHistory:
                                             {
-                                                List<Booking> AllBookings = BookingService.DisplayBookingsHistory(UserId);
+                                                List<Booking> AllBookings = BookingService.GetBookingsHistory(UserId);
                                                 if (AllBookings != null)
                                                 {
                                                     foreach (var booking in AllBookings)
@@ -254,7 +272,7 @@ namespace CarPool
                                             }
                                         case IEnums.UserOptions.DisplayOfferHistory:
                                             {
-                                                List<Offer> AllOffers = OfferService.DisplayOffersHistory(UserId);
+                                                List<Offer> AllOffers = OfferService.GetOffersHistory(UserId);
                                                 if (AllOffers != null)
                                                 {
                                                     foreach (var offer in AllOffers)
@@ -270,7 +288,7 @@ namespace CarPool
                                             }
                                         case IEnums.UserOptions.CancelRide:
                                             {
-                                                List<Booking> ActiveBookings = BookingService.DisplayActiveBookings(UserId);
+                                                List<Booking> ActiveBookings = BookingService.GetActiveBookings(UserId);
                                                 if (ActiveBookings != null)
                                                 {
                                                     foreach (var booking in ActiveBookings)
@@ -296,7 +314,7 @@ namespace CarPool
                                             }
                                         case IEnums.UserOptions.EndRide:
                                             {
-                                                List<string> PassengersInVehicle = BookingService.DisplayPassengersInVehicle(UserId);
+                                                List<string> PassengersInVehicle = BookingService.GetPassengersInVehicle(UserId);
                                                 foreach (var Passenger in PassengersInVehicle)
                                                 {
                                                     Console.WriteLine("RideeId: " + Passenger);
@@ -308,7 +326,7 @@ namespace CarPool
                                             }
                                         case IEnums.UserOptions.Pay:
                                             {
-                                                List<Payment> PendingPayments = PaymentService.DisplayPendingDues(UserId);
+                                                List<Payment> PendingPayments = PaymentService.GetPendingDues(UserId);
                                                 if (PendingPayments.Count != 0)
                                                 {
                                                     foreach (var payment in PendingPayments)
@@ -351,12 +369,12 @@ namespace CarPool
 
                                         case IEnums.UserOptions.WalletBalance:
                                             {
-                                                Console.WriteLine("your wallet balance: " + UserService.DisplayWalletBalance(UserId));
+                                                Console.WriteLine("your wallet balance: " + UserService.GetWalletBalance(UserId));
                                                 break;
                                             }
                                         case IEnums.UserOptions.DisplayPaymentHistory:
                                             {
-                                                List<Payment> AllPayments = PaymentService.DisplayPaymentHistory(UserId);
+                                                List<Payment> AllPayments = PaymentService.GetPaymentHistory(UserId);
                                                 if (AllPayments.Count != 0)
                                                 {
                                                     foreach (var payment in AllPayments)
@@ -390,11 +408,15 @@ namespace CarPool
 
                     case IEnums.CarPoolOptions.Exit:
                         {
+                            
                             System.Environment.Exit(0);
                             break;
                         }
                 }
+                
+                DatabaseService.MoveDataToJson();
             }
+           
         }
     }
 }

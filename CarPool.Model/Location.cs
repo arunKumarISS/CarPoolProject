@@ -13,5 +13,12 @@ namespace CarPool.Model
         public double Latitude;
         public double Longitude;
         public IEnums.LocationIndex Index;
+
+        public Location(string name, double latitude, double longitude)
+        {
+            Name = name;
+            Latitude = latitude;
+            Longitude = longitude;
+        }
     }
 }

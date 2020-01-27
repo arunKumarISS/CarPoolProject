@@ -57,5 +57,11 @@ namespace CarPool.Services
             Distance = radius * c;
             return Distance*100;
         }
+
+        public void AddLocation(string name, double latitude, double longitude)
+        {
+            Location NewLocation = new Location(name, latitude, longitude);
+            DataBase.Locations.Add(NewLocation);
+        }
     }
 }

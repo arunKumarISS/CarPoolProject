@@ -38,7 +38,7 @@ namespace CarPool.Services
             DataBase.OfferRequests.Add(NewOfferRequest);
         }
 
-        public List<OfferRequest> DisplayOfferRequests(string riderId)
+        public List<OfferRequest> GetOfferRequests(string riderId)
         {
             List<OfferRequest> OfferRequests = new List<OfferRequest>();
             foreach (var offerRequest in DataBase.OfferRequests)

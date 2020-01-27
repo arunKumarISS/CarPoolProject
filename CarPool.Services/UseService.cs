@@ -41,7 +41,7 @@ namespace CarPool.Services
             }
         }
 
-        public double DisplayWalletBalance(string userId)
+        public double GetWalletBalance(string userId)
         {
             foreach(var user in DataBase.Users)
             {

@@ -47,6 +47,8 @@ namespace CarPool.Services
             {
                 if (booking.RiderId.Equals(riderId) && booking.RideeId.Equals(rideeId))
                 {
+                    OfferService OfferService = new OfferService();
+                    OfferService.UpdateAvailability(riderId, -booking.NumberOfPassengers);
                     PaymentService NewPaymentDue = new PaymentService();
                     NewPaymentDue.AddPaymentDue(riderId);
                     booking.Status = IEnums.BookingStatus.Ended;
@@ -76,7 +78,7 @@ namespace CarPool.Services
             return false;
         }
 
-        public List<Booking> DisplayBookingsHistory(string userId)
+        public List<Booking> GetBookingsHistory(string userId)
         {
             List<Booking> AllBookings = new List<Booking>();
             foreach(var booking in DataBase.Bookings)
@@ -87,7 +89,7 @@ namespace CarPool.Services
             return AllBookings;
         }
 
-        public List<Booking> DisplayActiveBookings(string userId)
+        public List<Booking> GetActiveBookings(string userId)
         {
             List<Booking> AllBookings = new List<Booking>();
             foreach (var booking in DataBase.Bookings)
@@ -104,12 +106,17 @@ namespace CarPool.Services
             {
                 if(booking.RiderId.Equals(riderId))
                 {
+                    if(booking.Status.Equals(IEnums.BookingStatus.Confirmed))
+                    {
+                        OfferService OfferService = new OfferService();
+                        OfferService.UpdateAvailability(riderId, -booking.NumberOfPassengers);
+                    }
                     booking.Status = IEnums.BookingStatus.Cancelled;
                 }
             }
         }
 
-        public List<string> DisplayPassengersInVehicle(string riderId)
+        public List<string> GetPassengersInVehicle(string riderId)
         {
             List<string> PassengersInVehicle = new List<string>();
             foreach(var booking in DataBase.Bookings)

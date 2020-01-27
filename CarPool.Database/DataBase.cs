@@ -15,5 +15,6 @@ namespace CarPool.Database
         public static List<OfferRequest> OfferRequests = new List<OfferRequest>();
         public static List<Payment> Payments = new List<Payment>();
         public static List<Location> Locations = new List<Location>();
+       
     }
 }
