@@ -55,7 +55,7 @@ namespace CarPool.Services
                             + Math.Pow(radiusP * Math.Sin(Latitude1 / 180 * Math.PI), 2);
             double radius = Math.Sqrt(nr / dr);
             Distance = radius * c;
-            return Distance*100;
+            return Distance;
         }
 
         public void AddLocation(string name, double latitude, double longitude)

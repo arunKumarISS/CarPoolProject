@@ -61,7 +61,7 @@ namespace CarPool.Services
         {
             foreach(var booking in DataBase.Bookings)
             {
-                if(booking.RiderId.Equals(riderId) && booking.Status.Equals(IEnums.BookingStatus.Confirmed))
+                if(booking.RiderId.Equals(riderId) && booking.Status.Equals(IEnums.BookingStatus.RideStarted))
                 {
                     booking.Status = IEnums.BookingStatus.Ended;
                 }
@@ -94,7 +94,7 @@ namespace CarPool.Services
             List<Booking> AllBookings = new List<Booking>();
             foreach (var booking in DataBase.Bookings)
             {
-                if (booking.RideeId.Equals(userId) && (booking.Status.Equals(IEnums.BookingStatus.Confirmed) || booking.Status.Equals(IEnums.BookingStatus.Pending)) )
+                if (booking.RideeId.Equals(userId) && (booking.Status.Equals(IEnums.BookingStatus.Confirmed) || booking.Status.Equals(IEnums.BookingStatus.Pending) || booking.Status.Equals(IEnums.BookingStatus.RideStarted)) )
                     AllBookings.Add(booking);
             }
             return AllBookings;
@@ -106,7 +106,7 @@ namespace CarPool.Services
             {
                 if(booking.RiderId.Equals(riderId))
                 {
-                    if(booking.Status.Equals(IEnums.BookingStatus.Confirmed))
+                    if (booking.Status.Equals(IEnums.BookingStatus.Confirmed) || booking.Status.Equals(IEnums.BookingStatus.Pending))
                     {
                         OfferService OfferService = new OfferService();
                         OfferService.UpdateAvailability(riderId, -booking.NumberOfPassengers);
@@ -125,6 +125,17 @@ namespace CarPool.Services
                     PassengersInVehicle.Add(booking.RideeId);
             }
             return PassengersInVehicle;
+        }
+
+        public void StartRide(string userId)
+        {
+            foreach(var booking in DataBase.Bookings)
+            {
+                if(booking.RiderId.Equals(userId) && booking.Status.Equals(IEnums.BookingStatus.Confirmed))
+                {
+                    booking.Status = IEnums.BookingStatus.RideStarted;
+                }
+            }
         }
 
     }

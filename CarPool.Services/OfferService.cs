@@ -22,11 +22,12 @@ namespace CarPool.Services
             {
                 if (offer.RiderId.Equals(riderId) && offer.Status != IEnums.OfferStatus.Ended)
                 {
-                    UpdateOfferStatus(offer, IEnums.OfferStatus.Ended);
+                    
                     PaymentService NewPaymentDue = new PaymentService();
                     NewPaymentDue.AddPaymentDue(riderId);
                     BookingService BookingService = new BookingService();
                     BookingService.EndAllRides(riderId);
+                    UpdateOfferStatus(offer, IEnums.OfferStatus.Ended);
                 }
             }
         }
@@ -35,7 +36,7 @@ namespace CarPool.Services
         {
             foreach (var offer in DataBase.Offers)
             {
-                if (string.Equals(vehicleNumber, offer.VehicleRegNumber))
+                if (string.Equals(vehicleNumber, offer.VehicleRegNumber) && offer.Status.Equals(IEnums.OfferStatus.Active))
                 {
                     return false;
                 }
@@ -69,7 +70,7 @@ namespace CarPool.Services
         {
             foreach (var offer in DataBase.Offers)
             {
-                if (offer.RiderId.Equals(riderId) && offer.Status.Equals(IEnums.OfferStatus.Active))
+                if (offer.RiderId.Equals(riderId) && (offer.Status.Equals(IEnums.OfferStatus.Active) || offer.Status.Equals(IEnums.OfferStatus.RideStarted)))
                 {
                     if (numberOfPassengers < offer.Availability)
                         return true;
@@ -82,7 +83,7 @@ namespace CarPool.Services
         {
             foreach (var offer in DataBase.Offers)
             {
-                if (offer.RiderId.Equals(riderId) && offer.Status.Equals(IEnums.OfferStatus.Active))
+                if (offer.RiderId.Equals(riderId) && (offer.Status.Equals(IEnums.OfferStatus.Active) || offer.Status.Equals(IEnums.OfferStatus.RideStarted)))
                 {
                     offer.Availability -= numberOfPassengers;
                     if (offer.Availability == 0)
@@ -150,6 +151,21 @@ namespace CarPool.Services
                     break;
                 }
             }
+        }
+
+        public bool StartRide(string userId)
+        {
+            foreach(var offer in DataBase.Offers)
+            {
+                if(string.Equals(offer.RiderId, userId) && offer.Status.Equals(IEnums.OfferStatus.Active))
+                {
+                    offer.Status = IEnums.OfferStatus.RideStarted;
+                    BookingService bookingService = new BookingService();
+                    bookingService.StartRide(userId);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

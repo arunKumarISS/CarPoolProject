@@ -28,6 +28,7 @@ namespace CarPool.Enums
             DisplayPaymentDues = 12,
             WalletBalance = 13,
             DisplayPaymentHistory = 14,
+            StartRide = 15,
             Logout = 0
         }
 
@@ -42,6 +43,7 @@ namespace CarPool.Enums
             Active,
             OutOfSeats,
             Cancelled,
+            RideStarted,
             Ended
         }
 
@@ -50,6 +52,7 @@ namespace CarPool.Enums
             Pending,
             Confirmed,
             Cancelled,
+            RideStarted,
             Ended
         }
 

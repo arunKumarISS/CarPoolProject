@@ -43,7 +43,7 @@ namespace CarPool.Services
         {
             foreach (var booking in DataBase.Bookings)
             {
-                if (booking.RiderId.Equals(riderId) && booking.Status.Equals(IEnums.BookingStatus.Confirmed))
+                if (booking.RiderId.Equals(riderId) && booking.Status.Equals(IEnums.BookingStatus.RideStarted))
                 {
                     Payment NewPayment = new Payment(riderId, booking.RideeId, booking.Fair);
                     DataBase.Payments.Add(NewPayment);

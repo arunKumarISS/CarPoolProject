@@ -75,6 +75,10 @@
       <Project>{78f47426-e054-44c3-8482-632c4589eb24}</Project>
       <Name>CarPool.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CarPool.Repository\CarPool.Repository.csproj">
+      <Project>{88ddbe52-1f59-4898-8adc-764e7898aa59}</Project>
+      <Name>CarPool.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

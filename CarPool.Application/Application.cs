@@ -54,6 +54,7 @@ namespace CarPool.Application
                             Console.WriteLine("Name: " + NewUser.Name);
                             Console.WriteLine("UserId: " + NewUser.UserId);
                             Console.WriteLine("Account Created Successfully!!");
+                            DatabaseService.MoveDataToJson();
                             break;
                         }
 
@@ -88,6 +89,7 @@ namespace CarPool.Application
                                         "6 -> Display offers history\n8 -> Cancel Offer\n9 -> End Ride\n15 -> End Offer\n10 -> Pay\n11 -> Add money to wallet\n" +
                                         "13 -> wallet Balance\n14 -> display payment History\n0 -> Logout");
                                     }
+                                    
                                     else
                                     {
                                         Console.WriteLine("1 -> Book a Ride\n2 -> Offer a Ride\n5 -> Display booking history\n" +
@@ -171,6 +173,7 @@ namespace CarPool.Application
                                                         }
                                                     }
                                                 }
+                                                DatabaseService.MoveDataToJson();
                                                 break;
                                             }
                                         case IEnums.UserOptions.OfferARide:
@@ -227,6 +230,7 @@ namespace CarPool.Application
                                                 }
                                                 else
                                                     Console.WriteLine(FromLocation + " not found");
+                                                DatabaseService.MoveDataToJson();
                                                 break;
                                             }
                                         case IEnums.UserOptions.DisplayCurrentBookingStatus:
@@ -305,12 +309,14 @@ namespace CarPool.Application
                                                 {
                                                     Console.WriteLine("no active bookings to cancel");
                                                 }
+                                                DatabaseService.MoveDataToJson();
                                                 break;
                                             }
                                         case IEnums.UserOptions.CancelOffer:
                                             {
                                                 OfferService.CancelOffer(UserId);
                                                 Console.WriteLine("Offer Cancelled");
+                                                DatabaseService.MoveDataToJson();
                                                 break;
                                             }
                                         case IEnums.UserOptions.EndRide:
@@ -323,6 +329,7 @@ namespace CarPool.Application
                                                 Console.WriteLine("enter ridee Id");
                                                 string RideeId = Console.ReadLine();
                                                 BookingService.EndRide(UserId, RideeId);
+                                                DatabaseService.MoveDataToJson();
                                                 break;
                                             }
                                         case IEnums.UserOptions.Pay:
@@ -357,6 +364,7 @@ namespace CarPool.Application
                                                 }
                                                 else
                                                     Console.WriteLine("no pending dues");
+                                                DatabaseService.MoveDataToJson();
                                                 break;
                                             }
                                         case IEnums.UserOptions.AddMoneyToWallet:
@@ -365,6 +373,7 @@ namespace CarPool.Application
                                                 double Amount = Convert.ToDouble(Console.ReadLine());
                                                 UserService.AddMoneyToWallet(Amount, UserId);
                                                 Console.WriteLine("Money added successfully!!");
+                                                DatabaseService.MoveDataToJson();
                                                 break;
                                             }
 
@@ -392,6 +401,18 @@ namespace CarPool.Application
                                                 }
                                                 else
                                                     Console.WriteLine("you have no payments to display");
+                                                break;
+                                            }
+                                        case IEnums.UserOptions.StartRide:
+                                            {
+                                                if(OfferService.StartRide(UserId))
+                                                {
+                                                    Console.WriteLine("Ride started!!");
+                                                }
+                                                else
+                                                {
+                                                    Console.WriteLine("you have no rides to start");
+                                                }
                                                 break;
                                             }
                                         case IEnums.UserOptions.Logout:

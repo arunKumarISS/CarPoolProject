@@ -1,1 +1,16 @@
-[{"Name":"ARUN","UserId":"ARU091244","Password":"kumar","PhoneNumber":null,"Wallet":0.0},{"Name":"RAGHU","UserId":"RAG091700","Password":"ksdj","PhoneNumber":null,"Wallet":0.0}]
+[
+  {
+    "Name": "ARUN",
+    "UserId": "ARU091244",
+    "Password": "kumar",
+    "PhoneNumber": null,
+    "Wallet": 0.0
+  },
+  {
+    "Name": "RAGHU",
+    "UserId": "RAG091700",
+    "Password": "ksdj",
+    "PhoneNumber": null,
+    "Wallet": 0.0
+  }
+]

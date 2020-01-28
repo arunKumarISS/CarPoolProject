@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using CarPool.Model;
 using CarPool.Database;
+using CarPool.Repository;
 
 namespace CarPool.Services
 {
-    public class UserService
+    public class UserService  : EntityBase
     {
         public User CreateUser(string name, string password)
         {
@@ -15,7 +16,11 @@ namespace CarPool.Services
             return NewUser;
         }
 
-
+        public void Add(User user)
+        {
+            UserRepository<User> userRepository = new UserRepository<User>();
+            userRepository.Add(user);
+        }
 
         public bool CheckUserCredentials(string userId, string password)
         {
