@@ -59,7 +59,7 @@ namespace CarPool.Services
                 if (payment.RideeId.Equals(userId) && payment.Status.Equals(IEnums.PaymentStatus.Pending))
                     count++;
             }
-            if (count >= 3)
+            if (count >= 1)
                 return false;
             else
                 return true;

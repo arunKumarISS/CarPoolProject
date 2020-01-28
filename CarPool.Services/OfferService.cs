@@ -35,7 +35,7 @@ namespace CarPool.Services
         {
             foreach (var offer in DataBase.Offers)
             {
-                if (offer.VehicleRegNumber.Equals(vehicleNumber))
+                if (string.Equals(vehicleNumber, offer.VehicleRegNumber))
                 {
                     return false;
                 }
@@ -53,13 +53,14 @@ namespace CarPool.Services
                 Count2 = 0;
                 foreach (var location in offer.ViaPoints)
                 {
-                    if (location.Equals(fromLocation))
+                    if (string.Equals(location.Name, fromLocation.Name))
                         Count1 = 1;
-                    if (location.Equals(toLocation))
+                    if (string.Equals(location.Name, toLocation.Name))
                         Count2 = 2;
+                    if (Count1 == 1 && Count2 == 2)
+                        ActiveOffers.Add(offer);
                 }
-                if (Count1 == 1 && Count2 == 2)
-                    ActiveOffers.Add(offer);
+                
             }
             return ActiveOffers;
         }

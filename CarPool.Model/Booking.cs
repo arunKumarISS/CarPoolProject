@@ -20,7 +20,7 @@ namespace CarPool.Model
 
         public Booking(string riderId, string rideeId, Location fromLocation, Location toLocation, int numnberOfPassengers, double fair)
         {
-            RideeId = riderId;
+            RiderId = riderId;
             FromLocation = fromLocation;
             ToLocation = toLocation;
             RideeId = rideeId;

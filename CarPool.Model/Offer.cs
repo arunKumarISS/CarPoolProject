@@ -32,6 +32,8 @@ namespace CarPool.Model
             VehicleModel = vehicleModel;
             Status = status;
             OfferId = RiderId.Substring(0, 3) + DateTime.Now.ToString("hhmmss");
+            ViaPoints.Add(fromLocation);
+            ViaPoints.Add(toLocation);
         }
 
         public Offer()

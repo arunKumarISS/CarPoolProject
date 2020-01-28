@@ -22,7 +22,7 @@ namespace CarPool.Application
             OfferRequestService OfferRequestService = new OfferRequestService();
             PaymentService PaymentService = new PaymentService();
             LocationService LocationService = new LocationService();
-            DatabaseService.MoveDataToJson();
+            
             DatabaseService.GetDataFromJson();
             LocationService.AddLocation("MIYAPUR", 17.512510, 78.352226);
             LocationService.AddLocation("MADHAPUR", 17.448294, 78.391487);
@@ -199,7 +199,7 @@ namespace CarPool.Application
                                                             List<Location> ViaPoints = LocationService.GetViaPoints(StartPoint, EndPoint);
                                                             if (ViaPoints.Count != 0)
                                                             {
-                                                                Offer.ViaPoints.Add(StartPoint);
+                                                                
                                                                 int SelectViaPoint = 0;
                                                                 do
                                                                 {
@@ -214,12 +214,13 @@ namespace CarPool.Application
                                                                     IEnums.LocationIndex LocationIndex = (IEnums.LocationIndex)SelectViaPoint;
                                                                     OfferService.AddViaPoint(Offer, LocationIndex);
                                                                 } while (SelectViaPoint != 0);
-                                                                Offer.ViaPoints.Add(EndPoint);
+                                                                
                                                                 Console.WriteLine("offer created successfully!!");
                                                             }
-                                                            else
-                                                                Console.WriteLine("Cannot use same vehicle for two offers");
+                                                            
                                                         }
+                                                        else
+                                                            Console.WriteLine("Cannot use same vehicle for two offers");
                                                     }
                                                     else
                                                         Console.WriteLine(ToLocation + " not found");
@@ -409,12 +410,13 @@ namespace CarPool.Application
                     case IEnums.CarPoolOptions.Exit:
                         {
 
+                            DatabaseService.MoveDataToJson();
                             System.Environment.Exit(0);
                             break;
                         }
                 }
 
-                DatabaseService.MoveDataToJson();
+                
             }
 
         }

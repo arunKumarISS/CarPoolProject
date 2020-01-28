@@ -11,6 +11,7 @@ namespace CarPool.Services
         public User CreateUser(string name, string password)
         {
             User NewUser = new User(name, password);
+            DataBase.Users.Add(NewUser);
             return NewUser;
         }
 
@@ -20,7 +21,9 @@ namespace CarPool.Services
         {
             foreach (var user in DataBase.Users)
             {
-                if (user.UserId.Equals(userId) && user.Password.Equals(password))
+                string UserId = user.UserId;
+                string Password = user.Password;
+                if (UserId == userId && Password == password)
                 {
 
                     return true;
