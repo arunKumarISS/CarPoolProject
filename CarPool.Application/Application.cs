@@ -12,10 +12,10 @@ namespace CarPool.Application
 {
     public class Application
     {
-
+       
         public static void Presentation()
         {
-            DatabaseService DatabaseService = new DatabaseService();
+            
             UserService UserService = new UserService();
             BookingService BookingService = new BookingService();
             OfferService OfferService = new OfferService();
@@ -23,7 +23,7 @@ namespace CarPool.Application
             PaymentService PaymentService = new PaymentService();
             LocationService LocationService = new LocationService();
             
-            DatabaseService.GetDataFromJson();
+            
             LocationService.AddLocation("MIYAPUR", 17.512510, 78.352226);
             LocationService.AddLocation("MADHAPUR", 17.448294, 78.391487);
             LocationService.AddLocation("KOTI", 17.385042, 78.485753);
@@ -52,9 +52,10 @@ namespace CarPool.Application
                             string Password = Console.ReadLine();
                             User NewUser = UserService.CreateUser(Name.ToUpper(), Password);
                             Console.WriteLine("Name: " + NewUser.Name);
-                            Console.WriteLine("UserId: " + NewUser.UserId);
+                            Console.WriteLine("UserId: " + NewUser.Id);
                             Console.WriteLine("Account Created Successfully!!");
-                            DatabaseService.MoveDataToJson();
+                            
+                           
                             break;
                         }
 
@@ -149,7 +150,7 @@ namespace CarPool.Application
                                                         List<Payment> PaymentDues = PaymentService.GetPendingDues(UserId);
                                                         foreach (var payment in PaymentDues)
                                                         {
-                                                            Console.WriteLine("BookingId: " + payment.PaymentID + ", amount to be paid: " + payment.Fair);
+                                                            Console.WriteLine("BookingId: " + payment.Id + ", amount to be paid: " + payment.Fair);
                                                         }
                                                         Console.WriteLine("enter paymentId: ");
                                                         string PaymentId = Console.ReadLine();
@@ -173,7 +174,7 @@ namespace CarPool.Application
                                                         }
                                                     }
                                                 }
-                                                DatabaseService.MoveDataToJson();
+                                                
                                                 break;
                                             }
                                         case IEnums.UserOptions.OfferARide:
@@ -230,7 +231,7 @@ namespace CarPool.Application
                                                 }
                                                 else
                                                     Console.WriteLine(FromLocation + " not found");
-                                                DatabaseService.MoveDataToJson();
+                                                
                                                 break;
                                             }
                                         case IEnums.UserOptions.DisplayCurrentBookingStatus:
@@ -309,14 +310,14 @@ namespace CarPool.Application
                                                 {
                                                     Console.WriteLine("no active bookings to cancel");
                                                 }
-                                                DatabaseService.MoveDataToJson();
+                                                
                                                 break;
                                             }
                                         case IEnums.UserOptions.CancelOffer:
                                             {
                                                 OfferService.CancelOffer(UserId);
                                                 Console.WriteLine("Offer Cancelled");
-                                                DatabaseService.MoveDataToJson();
+                                                
                                                 break;
                                             }
                                         case IEnums.UserOptions.EndRide:
@@ -329,7 +330,7 @@ namespace CarPool.Application
                                                 Console.WriteLine("enter ridee Id");
                                                 string RideeId = Console.ReadLine();
                                                 BookingService.EndRide(UserId, RideeId);
-                                                DatabaseService.MoveDataToJson();
+                                                
                                                 break;
                                             }
                                         case IEnums.UserOptions.Pay:
@@ -339,7 +340,7 @@ namespace CarPool.Application
                                                 {
                                                     foreach (var payment in PendingPayments)
                                                     {
-                                                        Console.WriteLine("PaymentId: " + payment.PaymentID + ", Fair: " + payment.Fair);
+                                                        Console.WriteLine("PaymentId: " + payment.Id + ", Fair: " + payment.Fair);
                                                     }
                                                     Console.WriteLine("enter paymentId: ");
                                                     string PaymentId = Console.ReadLine();
@@ -364,7 +365,7 @@ namespace CarPool.Application
                                                 }
                                                 else
                                                     Console.WriteLine("no pending dues");
-                                                DatabaseService.MoveDataToJson();
+                                                
                                                 break;
                                             }
                                         case IEnums.UserOptions.AddMoneyToWallet:
@@ -373,7 +374,7 @@ namespace CarPool.Application
                                                 double Amount = Convert.ToDouble(Console.ReadLine());
                                                 UserService.AddMoneyToWallet(Amount, UserId);
                                                 Console.WriteLine("Money added successfully!!");
-                                                DatabaseService.MoveDataToJson();
+                                                
                                                 break;
                                             }
 
@@ -391,11 +392,11 @@ namespace CarPool.Application
                                                     {
                                                         if (payment.RideeId.Equals(UserId))
                                                         {
-                                                            Console.WriteLine("PaymentId: " + payment.PaymentID + " to " + payment.RiderId + " Status: " + payment.Status);
+                                                            Console.WriteLine("PaymentId: " + payment.Id + " to " + payment.RiderId + " Status: " + payment.Status);
                                                         }
                                                         else if (payment.RiderId.Equals(UserId))
                                                         {
-                                                            Console.WriteLine("PaymentId: " + payment.PaymentID + " from " + payment.RideeId + " Status: " + payment.Status);
+                                                            Console.WriteLine("PaymentId: " + payment.Id + " from " + payment.RideeId + " Status: " + payment.Status);
                                                         }
                                                     }
                                                 }
@@ -431,7 +432,7 @@ namespace CarPool.Application
                     case IEnums.CarPoolOptions.Exit:
                         {
 
-                            DatabaseService.MoveDataToJson();
+                            
                             System.Environment.Exit(0);
                             break;
                         }

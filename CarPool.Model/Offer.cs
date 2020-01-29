@@ -7,9 +7,9 @@ using CarPool.Enums;
 
 namespace CarPool.Model
 {
-    public class Offer
+    public class Offer : EntityBase
     {
-        public string OfferId;
+        
         public string DriverName;
         public string RiderId;
         public Location FromLocation;
@@ -31,7 +31,7 @@ namespace CarPool.Model
             VehicleRegNumber = vehicleRegNumber;
             VehicleModel = vehicleModel;
             Status = status;
-            OfferId = RiderId.Substring(0, 3) + DateTime.Now.ToString("hhmmss");
+            Id = RiderId.Substring(0, 3) + DateTime.Now.ToString("hhmmss");
             ViaPoints.Add(fromLocation);
             ViaPoints.Add(toLocation);
         }

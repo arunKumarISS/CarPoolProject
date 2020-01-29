@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CarPool.Model
 {
-    public class User
+    public class User : EntityBase
     {
         public string Name;
-        public string UserId;
+        
         public string Password;
         public string PhoneNumber;
         public double Wallet;
@@ -17,7 +17,7 @@ namespace CarPool.Model
         public User(string name, string password)
         {
             Name = name;
-            UserId = name.ToUpper().Substring(0, 3) + DateTime.Now.ToString("hhmmss");
+            Id = name.ToUpper().Substring(0, 3) + DateTime.Now.ToString("hhmmss");
             Password = password;
             Wallet = 0;
         }

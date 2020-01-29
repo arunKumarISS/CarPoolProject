@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using CarPool.Enums;
 
-namespace CarPool.Model
+namespace CarPool.Model 
 {
-    public class OfferRequest
+    public class OfferRequest : EntityBase
     {
         public string RiderId;
         public string RideeId;
@@ -15,7 +15,7 @@ namespace CarPool.Model
         public Location ToLocation;
         public IEnums.RequestStatus Status;
         public int NumberOfPassengers;
-        public string RequestId;
+        
 
         public OfferRequest(Location fromLocation, Location toLocation, int numberOfPassengers, string riderId, string rideeId)
         {
@@ -25,7 +25,7 @@ namespace CarPool.Model
             ToLocation = toLocation;
             Status = IEnums.RequestStatus.Pending;
             NumberOfPassengers = numberOfPassengers;
-            RequestId = rideeId.Substring(0, 3) + DateTime.Now.ToString("hhmmss") + riderId.Substring(0, 3);
+            Id = rideeId.Substring(0, 3) + DateTime.Now.ToString("hhmmss") + riderId.Substring(0, 3);
         }
     }
 }

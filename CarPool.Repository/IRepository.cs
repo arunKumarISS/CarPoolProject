@@ -7,13 +7,15 @@ using CarPool.Model;
 
 namespace CarPool.Repository
 {
-    public interface IRepository<T> where T : User
+    public interface IRepository<T>  
     {
-        User GetById(string id);
+        List<T> GetList();
+
+        T GetById(string id);
 
         void Add(T entity);
 
-        bool Delete(T entity);
+        void Delete(T entity);
 
         void Update(T entity);
     }

@@ -5,16 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using CarPool.Enums;
 
+
 namespace CarPool.Model
 {
-    public class Booking
+    public class Booking : EntityBase
     {
         public Location FromLocation;
         public Location ToLocation;
         public string RideeId;
         public string RiderId;
-        public IEnums.BookingStatus Status;
-        
+        public IEnums.BookingStatus Status;        
         public double Fair;
         public int NumberOfPassengers;
 

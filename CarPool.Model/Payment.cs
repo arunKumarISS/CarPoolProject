@@ -7,9 +7,9 @@ using CarPool.Enums;
 
 namespace CarPool.Model
 {
-    public class Payment
+    public class Payment : EntityBase
     {
-        public string PaymentID;
+        
         public string RiderId;
         public string RideeId;
         public double Fair;
@@ -21,7 +21,7 @@ namespace CarPool.Model
             RideeId = rideeId;
             Fair = fair;
             Status = IEnums.PaymentStatus.Pending;
-            PaymentID = riderId.Substring(0, 3) + DateTime.Now.ToString("hhmmss") + rideeId.Substring(0, 3);
+            Id = riderId.Substring(0, 3) + DateTime.Now.ToString("hhmmss") + rideeId.Substring(0, 3);
         }
     }
 }

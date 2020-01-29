@@ -4,6 +4,7 @@ using System.Text;
 using CarPool.Database;
 using CarPool.Model;
 using CarPool.Enums;
+using CarPool.Repository;
 
 namespace CarPool.Services
 {
@@ -11,9 +12,9 @@ namespace CarPool.Services
     {
         public void OfferRequestApproval(string requestId, IEnums.Decisions decision)
         {
-            foreach (var offerRequest in DataBase.OfferRequests)
+            foreach (var offerRequest in Repository<OfferRequest>.GetList())
             {
-                if (offerRequest.RequestId.Equals(requestId))
+                if (offerRequest.Id.Equals(requestId))
                 {
                     BookingService NewBookingService = new BookingService();
                     OfferService OfferService = new OfferService();
@@ -35,13 +36,13 @@ namespace CarPool.Services
         public void SendRideRequest(Location fromLocation, Location toLocation, int numberOfPassengers, string riderId, string rideeId)
         {
             OfferRequest NewOfferRequest = new OfferRequest(fromLocation, toLocation, numberOfPassengers, riderId, rideeId);
-            DataBase.OfferRequests.Add(NewOfferRequest);
+            Repository<OfferRequest>.Add(NewOfferRequest);
         }
 
         public List<OfferRequest> GetOfferRequests(string riderId)
         {
             List<OfferRequest> OfferRequests = new List<OfferRequest>();
-            foreach (var offerRequest in DataBase.OfferRequests)
+            foreach (var offerRequest in Repository<OfferRequest>.GetList())
             {
                 if (offerRequest.RiderId.Equals(riderId) && offerRequest.Status.Equals(IEnums.RequestStatus.Pending))
                 {
@@ -54,7 +55,7 @@ namespace CarPool.Services
         public bool AnyOfferRequest(string riderId)
         {
 
-            foreach (var offerRequest in DataBase.OfferRequests)
+            foreach (var offerRequest in Repository<OfferRequest>.GetList())
             {
                 if (offerRequest.RiderId.Equals(riderId) && offerRequest.Status.Equals(IEnums.RequestStatus.Pending))
                     return true;

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Booking.cs" />
+    <Compile Include="EntityBase.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Offer.cs" />
     <Compile Include="OfferRequest.cs" />

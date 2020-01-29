@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarPool.Repository
+namespace CarPool.Model
 {
-    class BookingRepository
+    public abstract class EntityBase
     {
+        public string Id;
     }
 }

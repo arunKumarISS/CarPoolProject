@@ -7,7 +7,7 @@ using CarPool.Enums;
 
 namespace CarPool.Model
 {
-    public class Location
+    public class Location 
     {
         public string Name;
         public double Latitude;

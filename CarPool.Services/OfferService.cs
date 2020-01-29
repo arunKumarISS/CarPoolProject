@@ -4,6 +4,7 @@ using System.Text;
 using CarPool.Model;
 using CarPool.Database;
 using CarPool.Enums;
+using CarPool.Repository;
 
 namespace CarPool.Services
 {
@@ -12,13 +13,13 @@ namespace CarPool.Services
         public Offer CreateOffer(string driverName, string userId, Location fromLocation, Location toLocation, int availability, string vehicleRegNumber, string vehicleModel)
         {
             Offer NewOffer = new Offer(driverName, userId, fromLocation, toLocation, availability, vehicleRegNumber, vehicleModel, IEnums.OfferStatus.Active);
-            DataBase.Offers.Add(NewOffer);
+            Repository<Offer>.Add(NewOffer);
             return NewOffer;
         }
 
         public void EndOffer(string riderId)
         {
-            foreach (var offer in DataBase.Offers)
+            foreach (var offer in Repository<Offer>.GetList())
             {
                 if (offer.RiderId.Equals(riderId) && offer.Status != IEnums.OfferStatus.Ended)
                 {
@@ -34,7 +35,7 @@ namespace CarPool.Services
 
         public bool VehicleVerification(string vehicleNumber)
         {
-            foreach (var offer in DataBase.Offers)
+            foreach (var offer in Repository<Offer>.GetList())
             {
                 if (string.Equals(vehicleNumber, offer.VehicleRegNumber) && offer.Status.Equals(IEnums.OfferStatus.Active))
                 {
@@ -48,7 +49,7 @@ namespace CarPool.Services
         {
             int Count1, Count2;
             List<Offer> ActiveOffers = new List<Offer>();
-            foreach(var offer in DataBase.Offers)
+            foreach(var offer in Repository<Offer>.GetList())
             {
                 Count1 = 0;
                 Count2 = 0;
@@ -68,7 +69,7 @@ namespace CarPool.Services
 
         public bool CheckAvailability(string riderId, int numberOfPassengers)
         {
-            foreach (var offer in DataBase.Offers)
+            foreach (var offer in Repository<Offer>.GetList())
             {
                 if (offer.RiderId.Equals(riderId) && (offer.Status.Equals(IEnums.OfferStatus.Active) || offer.Status.Equals(IEnums.OfferStatus.RideStarted)))
                 {
@@ -81,7 +82,7 @@ namespace CarPool.Services
 
         public void UpdateAvailability(string riderId, int numberOfPassengers)
         {
-            foreach (var offer in DataBase.Offers)
+            foreach (var offer in Repository<Offer>.GetList())
             {
                 if (offer.RiderId.Equals(riderId) && (offer.Status.Equals(IEnums.OfferStatus.Active) || offer.Status.Equals(IEnums.OfferStatus.RideStarted)))
                 {
@@ -95,7 +96,7 @@ namespace CarPool.Services
         public void AddViaPoint(Offer offer, IEnums.LocationIndex locationIndex)
         {
             
-            foreach (var location in DataBase.Locations)
+            foreach (var location in Repository<Location>.GetList())
             {
                 if(location.Index.Equals(locationIndex))
                 {
@@ -112,7 +113,7 @@ namespace CarPool.Services
 
         public bool AnyActiveOffer(string userId)
         {
-            foreach(var offer in DataBase.Offers)
+            foreach(var offer in Repository<Offer>.GetList())
             {
                 if (offer.RiderId.Equals(userId) && offer.Status != IEnums.OfferStatus.Ended)
                     return true;
@@ -122,7 +123,7 @@ namespace CarPool.Services
 
         public Offer GetDriverDetails(string riderId)
         {
-            foreach (var offer in DataBase.Offers)
+            foreach (var offer in Repository<Offer>.GetList())
             {
                 if (offer.RiderId.Equals(riderId) && offer.Status != IEnums.OfferStatus.Ended)
                     return offer;
@@ -133,7 +134,7 @@ namespace CarPool.Services
         public List<Offer> GetOffersHistory(string userId)
         {
             List<Offer> AllOffers = new List<Offer>();
-            foreach (var offer in DataBase.Offers)
+            foreach (var offer in Repository<Offer>.GetList())
             {
                 if (offer.RiderId.Equals(userId))
                     AllOffers.Add(offer);
@@ -143,7 +144,7 @@ namespace CarPool.Services
 
         public void CancelOffer(string userId)
         {
-            foreach(var offer in DataBase.Offers)
+            foreach(var offer in Repository<Offer>.GetList())
             {
                 if (offer.RiderId.Equals(userId) && (offer.Status.Equals(IEnums.OfferStatus.Active) || offer.Status.Equals(IEnums.OfferStatus.OutOfSeats)) )
                 {
@@ -155,7 +156,7 @@ namespace CarPool.Services
 
         public bool StartRide(string userId)
         {
-            foreach(var offer in DataBase.Offers)
+            foreach(var offer in Repository<Offer>.GetList())
             {
                 if(string.Equals(offer.RiderId, userId) && offer.Status.Equals(IEnums.OfferStatus.Active))
                 {

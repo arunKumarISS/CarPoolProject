@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookingService.cs" />
-    <Compile Include="DatabaseService.cs" />
     <Compile Include="LocationService.cs" />
     <Compile Include="OfferRequestService.cs" />
     <Compile Include="OfferService.cs" />

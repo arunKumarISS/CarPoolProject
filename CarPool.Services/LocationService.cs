@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CarPool.Model;
 using CarPool.Database;
+using CarPool.Repository;
 
 namespace CarPool.Services
 {
@@ -12,7 +13,7 @@ namespace CarPool.Services
     {
         public Location GetLocation(string locationName)
         {
-            foreach (var location in DataBase.Locations)
+            foreach (var location in Repository<Location>.GetList())
             {
                 if (location.Name.Equals(locationName))
                     return location;
@@ -23,7 +24,7 @@ namespace CarPool.Services
         public List<Location> GetViaPoints(Location startPoint, Location endPoint)
         {
             List<Location> ViaPoints = new List<Location>();
-            foreach (var location in DataBase.Locations)
+            foreach (var location in Repository<Location>.GetList())
             {
                 if (location.Equals(startPoint) || location.Equals(endPoint))
                     continue;
@@ -61,7 +62,7 @@ namespace CarPool.Services
         public void AddLocation(string name, double latitude, double longitude)
         {
             Location NewLocation = new Location(name, latitude, longitude);
-            DataBase.Locations.Add(NewLocation);
+            Repository<Location>.Add(NewLocation);
         }
     }
 }
