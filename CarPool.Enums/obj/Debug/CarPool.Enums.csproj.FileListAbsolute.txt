@@ -1,7 +1,0 @@
-C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Enums\obj\Debug\CarPool.Enums.csprojAssemblyReference.cache
-C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Enums\obj\Debug\CarPool.Enums.csproj.CoreCompileInputs.cache
-C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Enums\bin\Debug\CarPool.Enums.dll.config
-C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Enums\bin\Debug\CarPool.Enums.dll
-C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Enums\bin\Debug\CarPool.Enums.pdb
-C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Enums\obj\Debug\CarPool.Enums.dll
-C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Enums\obj\Debug\CarPool.Enums.pdb

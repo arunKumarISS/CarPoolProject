@@ -58,10 +58,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CarPool.Database\CarPool.Database.csproj">
-      <Project>{bc0e2520-21c8-421a-a872-20ad2e92fdf0}</Project>
-      <Name>CarPool.Database</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CarPool.Model\CarPool.Model.csproj">
       <Project>{78f47426-e054-44c3-8482-632c4589eb24}</Project>
       <Name>CarPool.Model</Name>
