@@ -11,9 +11,10 @@ namespace CarPool.Services
 {
     public class LocationService
     {
+        Repository<Location> locationRepository = new Repository<Location>();
         public Location GetLocation(string locationName)
         {
-            foreach (var location in Repository<Location>.GetList())
+            foreach (var location in locationRepository.GetList())
             {
                 if (location.Name.Equals(locationName))
                     return location;
@@ -24,7 +25,7 @@ namespace CarPool.Services
         public List<Location> GetViaPoints(Location startPoint, Location endPoint)
         {
             List<Location> ViaPoints = new List<Location>();
-            foreach (var location in Repository<Location>.GetList())
+            foreach (var location in locationRepository.GetList())
             {
                 if (location.Equals(startPoint) || location.Equals(endPoint))
                     continue;
@@ -62,7 +63,7 @@ namespace CarPool.Services
         public void AddLocation(string name, double latitude, double longitude)
         {
             Location NewLocation = new Location(name, latitude, longitude);
-            Repository<Location>.Add(NewLocation);
+            locationRepository.Add(NewLocation);
         }
     }
 }

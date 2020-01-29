@@ -203,21 +203,21 @@ namespace CarPool.Application
                                                             List<Location> ViaPoints = LocationService.GetViaPoints(StartPoint, EndPoint);
                                                             if (ViaPoints.Count != 0)
                                                             {
-                                                                
-                                                                int SelectViaPoint = 0;
+
+                                                                string SelectViaPoint;
                                                                 do
                                                                 {
                                                                     Console.WriteLine("you might touch these locations: ");
                                                                     foreach (var location in ViaPoints)
                                                                     {
-                                                                        Console.WriteLine(location.Index + " -> " + location.Name);
+                                                                        Console.WriteLine(location.Id + " -> " + location.Name);
                                                                     }
-                                                                    Console.WriteLine("0 -> end");
+                                                                    Console.WriteLine("END -> end");
                                                                     Console.WriteLine("selects the locations: ");
-                                                                    SelectViaPoint = Convert.ToInt32(Console.ReadLine());
-                                                                    IEnums.LocationIndex LocationIndex = (IEnums.LocationIndex)SelectViaPoint;
-                                                                    OfferService.AddViaPoint(Offer, LocationIndex);
-                                                                } while (SelectViaPoint != 0);
+                                                                    SelectViaPoint = Console.ReadLine();
+                                                                    
+                                                                    OfferService.AddViaPoint(Offer, SelectViaPoint);
+                                                                } while (SelectViaPoint != "END");
                                                                 
                                                                 Console.WriteLine("offer created successfully!!");
                                                             }

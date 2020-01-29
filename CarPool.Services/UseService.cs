@@ -9,18 +9,18 @@ namespace CarPool.Services
 {
     public class UserService  
     {
-        
 
+        Repository<User> userRepository = new Repository<User>();
         public User CreateUser(string name, string password)
         {
             User NewUser = new User(name, password);
-            Repository<User>.Add(NewUser);
+            userRepository.Add(NewUser);
             return NewUser;
         }
 
         public bool CheckUserCredentials(string userId, string password)
         {
-            User User = Repository<User>.GetById(userId);
+            User User = userRepository.GetById(userId);
             if (string.Equals(User.Password, password))
                 return true;
             else
@@ -29,13 +29,15 @@ namespace CarPool.Services
 
         public void AddMoneyToWallet(double amount, string userId)
         {
-            User User = Repository<User>.GetById(userId);
+            User User = userRepository.GetById(userId);
             User.Wallet += amount;
         }
 
         public double GetWalletBalance(string userId)
         {
-            return Repository<User>.GetById(userId).Wallet;
+            return userRepository.GetById(userId).Wallet;
         }
+
+        
     }
 }

@@ -10,13 +10,14 @@ namespace CarPool.Services
 {
     public class BookingService
     {
+        Repository<Booking> bookingRepository = new Repository<Booking>();
         public Booking CreateBooking(string riderId, string rideeId, Location fromLocation, Location toLocation, int numberOfPassengers)
         {
             LocationService LocationService = new LocationService();
             double Fair = LocationService.CalculateFair(fromLocation, toLocation);
             Booking NewBooking = new Booking(riderId, rideeId, fromLocation, toLocation, numberOfPassengers, Fair);
             
-            Repository<Booking>.Add(NewBooking);
+            bookingRepository.Add(NewBooking);
             return NewBooking;
         }
 

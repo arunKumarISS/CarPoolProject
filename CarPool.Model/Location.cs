@@ -7,12 +7,12 @@ using CarPool.Enums;
 
 namespace CarPool.Model
 {
-    public class Location 
+    public class Location : EntityBase
     {
         public string Name;
         public double Latitude;
         public double Longitude;
-        public IEnums.LocationIndex Index;
+        
 
         public Location(string name, double latitude, double longitude)
         {

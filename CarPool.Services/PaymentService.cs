@@ -10,44 +10,35 @@ namespace CarPool.Services
 {
     public class PaymentService
     {
+        Repository<Payment> paymentRepository = new Repository<Payment>();
         public bool Pay(string paymentId)
         {
-            foreach(var payment in Repository<Payment>.GetList())
+            
+            Repository<User> userRepository = new Repository<User>();
+
+            Payment payment = paymentRepository.GetById(paymentId);
+            User ridee = userRepository.GetById(payment.RideeId);
+            if (ridee.Wallet >= payment.Fair)
             {
-                if(payment.Id.Equals(paymentId))
-                {
-                    foreach(var ridee in Repository<User>.GetList())
-                    {
-                        if(ridee.Id.Equals(payment.RideeId))
-                        {
-                            if (ridee.Wallet >= payment.Fair)
-                                ridee.Wallet -= payment.Fair;
-                            else
-                                return false;
-                        }
-                    }
-                    foreach(var rider in Repository<User>.GetList())
-                    {
-                        if(rider.Id.Equals(payment.RiderId))
-                        {
-                            rider.Wallet += payment.Fair;
-                        }
-                    }
-                    payment.Status = IEnums.PaymentStatus.Paid;
-                    return true;
-                }
+                ridee.Wallet -= payment.Fair;
+                User rider = userRepository.GetById(payment.RiderId);
+                rider.Wallet += payment.Fair;
+                payment.Status = IEnums.PaymentStatus.Paid;
+                return true;
             }
-            return false;
+            else
+                return false;
         }
 
         public void AddPaymentDue(string riderId)
         {
-            foreach (var booking in Repository<Booking>.GetList())
+            Repository<Booking> bookingRepository = new Repository<Booking>();
+            foreach (var booking in bookingRepository.GetList())
             {
                 if (booking.RiderId.Equals(riderId) && booking.Status.Equals(IEnums.BookingStatus.RideStarted))
                 {
                     Payment NewPayment = new Payment(riderId, booking.RideeId, booking.Fair);
-                    Repository<Payment>.Add(NewPayment);
+                    paymentRepository.Add(NewPayment);
                 }
             }
         }
@@ -55,7 +46,7 @@ namespace CarPool.Services
         public bool IsEligibleToBook(string userId)
         {
             int count = 0;
-            foreach (var payment in Repository<Payment>.GetList())
+            foreach (var payment in paymentRepository.GetList())
             {
                 if (payment.RideeId.Equals(userId) && payment.Status.Equals(IEnums.PaymentStatus.Pending))
                     count++;
@@ -69,7 +60,7 @@ namespace CarPool.Services
         public List<Payment> GetPendingDues(string userId)
         {
             List<Payment> PendingDues = new List<Payment>();
-            foreach(var payment in Repository<Payment>.GetList())
+            foreach(var payment in paymentRepository.GetList())
             {
                 if(payment.RideeId.Equals(userId) && payment.Status.Equals(IEnums.PaymentStatus.Pending))
                 {
@@ -82,7 +73,7 @@ namespace CarPool.Services
         public List<Payment> GetPaymentHistory(string UserId)
         {
             List<Payment> AllPayments = new List<Payment>();
-            foreach(var payment in Repository<Payment>.GetList())
+            foreach(var payment in paymentRepository.GetList())
             {
                 if(payment.RideeId.Equals(UserId) || payment.RiderId.Equals(UserId))
                 {
@@ -91,6 +82,5 @@ namespace CarPool.Services
             }
             return AllPayments;
         }
-
     }
 }

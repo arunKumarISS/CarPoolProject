@@ -47,9 +47,18 @@ namespace CarPool.Repository
             return objects;
         }
 
+        public T GetById(string id)
+        {
+            foreach (var entity in objects)
+            {
+                if (entity.Id.Equals(id))
+                    return entity;
+            }
+            return null;
+        }
+
         public void Update(T entity)
         {
-
             Save();
         }
 
