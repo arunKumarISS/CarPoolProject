@@ -13,7 +13,7 @@ namespace CarPool.Repository
 {
     public class Repository<T> : IRepository<T> where T : EntityBase
     {
-        public static List<T> objects = new List<T>();
+        public static List<T> objects;
 
         public Repository()
         {
