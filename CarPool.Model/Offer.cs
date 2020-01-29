@@ -31,7 +31,7 @@ namespace CarPool.Model
             VehicleRegNumber = vehicleRegNumber;
             VehicleModel = vehicleModel;
             Status = status;
-            Id = RiderId.Substring(0, 3) + DateTime.Now.ToString("hhmmss");
+            Id = RiderId.Substring(0, 3) + DateTime.Now.ToString("hhmm");
             ViaPoints.Add(fromLocation);
             ViaPoints.Add(toLocation);
         }

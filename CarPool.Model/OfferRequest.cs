@@ -25,7 +25,7 @@ namespace CarPool.Model
             ToLocation = toLocation;
             Status = IEnums.RequestStatus.Pending;
             NumberOfPassengers = numberOfPassengers;
-            Id = rideeId.Substring(0, 3) + DateTime.Now.ToString("hhmmss") + riderId.Substring(0, 3);
+            Id = rideeId.Substring(0, 3) + DateTime.Now.ToString("hhmm") + riderId.Substring(0, 3);
         }
     }
 }

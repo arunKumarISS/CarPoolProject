@@ -7,12 +7,18 @@ using System.IO;
 using CarPool.Model;
 using Newtonsoft.Json;
 using System.Reflection;
-using CarPool.Database;
+
 
 namespace CarPool.Repository
 {
     public class Repository<T> : IRepository<T> where T : EntityBase
     {
+        public static List<T> objects = new List<T>();
+
+        public Repository()
+        {
+            objects = GetDataFromJson(typeof(T));
+        }
 
 
         public static IDictionary<string, string> ListOfPaths = new Dictionary<string, string>()
@@ -25,33 +31,39 @@ namespace CarPool.Repository
             {"LOCATION", @"D:\tasks\CarPool\Documents\locations.json"}
         };
 
-        public static List<T> objects = GetDataFromJson(typeof(T));
-
+        
 
 
         public void Add(T entity)
         {
+            
+            
             objects.Add(entity);
             Save();
         }
 
         public void Delete(T entity)
         {
+            
+            
             objects.Remove(entity);
             Save();
         }
 
         public List<T> GetList()
         {
-
+            
+            GetDataFromJson(typeof(T));
             return objects;
         }
 
         public T GetById(string id)
         {
+            
+            
             foreach (var entity in objects)
             {
-                if (entity.Id.Equals(id))
+                if (string.Equals(entity.Id,id))
                     return entity;
             }
             return null;
@@ -62,12 +74,13 @@ namespace CarPool.Repository
             Save();
         }
 
-        public static List<T> GetDataFromJson(Type t)
+        public List<T> GetDataFromJson(Type t)
         {
             string type = t.Name.ToString().ToUpper();
             string result;
             ListOfPaths.TryGetValue(type, out result);
-            return JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(result));
+            List<T> TObjects = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(result));
+            return TObjects;
         }
 
         public void Save()

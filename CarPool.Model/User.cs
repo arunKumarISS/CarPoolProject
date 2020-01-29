@@ -11,13 +11,13 @@ namespace CarPool.Model
         public string Name;
         
         public string Password;
-        public string PhoneNumber;
+        
         public double Wallet;
 
         public User(string name, string password)
         {
             Name = name;
-            Id = name.ToUpper().Substring(0, 3) + DateTime.Now.ToString("hhmmss");
+            Id = name.ToUpper().Substring(0, 3) + DateTime.Now.ToString("hhmm");
             Password = password;
             Wallet = 0;
         }

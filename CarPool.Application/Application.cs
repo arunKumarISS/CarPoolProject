@@ -22,19 +22,6 @@ namespace CarPool.Application
             OfferRequestService OfferRequestService = new OfferRequestService();
             PaymentService PaymentService = new PaymentService();
             LocationService LocationService = new LocationService();
-            
-            
-            LocationService.AddLocation("MIYAPUR", 17.512510, 78.352226);
-            LocationService.AddLocation("MADHAPUR", 17.448294, 78.391487);
-            LocationService.AddLocation("KOTI", 17.385042, 78.485753);
-            LocationService.AddLocation("AMEERPET", 17.437462, 78.448288);
-            LocationService.AddLocation("JUBILEE HILLS", 17.426161, 78.412537);
-            LocationService.AddLocation("HITECH CITY", 17.445190, 78.385117);
-            LocationService.AddLocation("LINGAMPALLY", 17.487400, 78.314453);
-            LocationService.AddLocation("DILSUKHNAGAR", 17.361718, 78.525805);
-            LocationService.AddLocation("LB NAGAR", 17.352533, 78.555088);
-            LocationService.AddLocation("BACHUPALLY", 17.526719, 78.354426);
-
 
             while (true)
             {
@@ -249,7 +236,7 @@ namespace CarPool.Application
                                                 {
                                                     List<OfferRequest> OfferRequests = OfferRequestService.GetOfferRequests(UserId);
                                                     foreach (var offerRequest in OfferRequests)
-                                                        Console.WriteLine("RequestId: " + offerRequest.RequestId + " from " + offerRequest.FromLocation + " to " + offerRequest.ToLocation);
+                                                        Console.WriteLine("RequestId: " + offerRequest.Id + " from " + offerRequest.FromLocation.Name + " to " + offerRequest.ToLocation.Name);
                                                     Console.WriteLine("enter the RequestId to accept or reject offer request");
                                                     string RequestId = Console.ReadLine();
                                                     Console.WriteLine("1 -> Accept offer\n2 -> reject offer");

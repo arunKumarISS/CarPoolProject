@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CarPool.Model;
-using CarPool.Database;
+
 using CarPool.Repository;
 
 namespace CarPool.Services
@@ -58,12 +58,6 @@ namespace CarPool.Services
             double radius = Math.Sqrt(nr / dr);
             Distance = radius * c;
             return Distance;
-        }
-
-        public void AddLocation(string name, double latitude, double longitude)
-        {
-            Location NewLocation = new Location(name, latitude, longitude);
-            locationRepository.Add(NewLocation);
         }
     }
 }

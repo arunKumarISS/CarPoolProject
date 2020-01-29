@@ -21,7 +21,7 @@ namespace CarPool.Model
             RideeId = rideeId;
             Fair = fair;
             Status = IEnums.PaymentStatus.Pending;
-            Id = riderId.Substring(0, 3) + DateTime.Now.ToString("hhmmss") + rideeId.Substring(0, 3);
+            Id = riderId.Substring(0, 3) + DateTime.Now.ToString("hhmm") + rideeId.Substring(0, 3);
         }
     }
 }
