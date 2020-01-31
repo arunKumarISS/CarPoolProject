@@ -21,6 +21,7 @@ namespace CarPool.Model
             RideeId = rideeId;
             Fair = fair;
             Status = IEnums.PaymentStatus.Pending;
+            // All Id generators can me moved to a separate helper class.
             Id = riderId.Substring(0, 3) + DateTime.Now.ToString("hhmm") + rideeId.Substring(0, 3);
         }
     }

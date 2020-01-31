@@ -2,6 +2,10 @@
 
 namespace CarPool.Enums
 {
+
+    // Why is it called IEnums.
+    //Enums need not be in another project. They are part of Models only.
+    // No plurals for enum names. Because when you are using you will have only one value.
     public static class IEnums
     {
         public enum CarPoolOptions
