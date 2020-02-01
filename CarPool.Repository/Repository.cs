@@ -36,15 +36,12 @@ namespace CarPool.Repository
 
         public void Add(T entity)
         {
-            
-            
             objects.Add(entity);
             Save();
         }
 
         public void Delete(T entity)
         {
-            
             
             objects.Remove(entity);
             Save();
