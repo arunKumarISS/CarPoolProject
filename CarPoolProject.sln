@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarPool.Application", "CarP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarPool.Repository", "CarPool.Repository\CarPool.Repository.csproj", "{88DDBE52-1F59-4898-8ADC-764E7898AA59}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{967F6EDF-9777-42C6-9893-EDCC4FD68413}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{88DDBE52-1F59-4898-8ADC-764E7898AA59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88DDBE52-1F59-4898-8ADC-764E7898AA59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88DDBE52-1F59-4898-8ADC-764E7898AA59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{967F6EDF-9777-42C6-9893-EDCC4FD68413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{967F6EDF-9777-42C6-9893-EDCC4FD68413}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{967F6EDF-9777-42C6-9893-EDCC4FD68413}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{967F6EDF-9777-42C6-9893-EDCC4FD68413}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
