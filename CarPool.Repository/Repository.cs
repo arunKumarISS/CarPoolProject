@@ -17,18 +17,20 @@ namespace CarPool.Repository
 
         public Repository()
         {
-            objects = GetDataFromJson(typeof(T));
+            objects = GetDataFromJson();
         }
 
-
-        public static IDictionary<string, string> ListOfPaths = new Dictionary<string, string>()
+        // This doesnt have to be a dictionary these can be constant strings
+        // If using a dictionary you can rather map between Type and string instead of string and string
+        // Please check the changes I made
+        public static IDictionary<Type, string> ListOfPaths = new Dictionary<Type, string>()
         {
-            {"USER",@"D:\tasks\CarPool\Documents\users.json" },
-            {"OFFER", @"D:\tasks\CarPool\Documents\offers.json"},
-            {"BOOKING",  @"D:\tasks\CarPool\Documents\bookings.json"},
-            {"OFFERREQUEST", @"D:\tasks\CarPool\Documents\offerRequests.json"},
-            {"PAYMENT", @"D:\tasks\CarPool\Documents\payments.json"},
-            {"LOCATION", @"D:\tasks\CarPool\Documents\locations.json"}
+            {typeof(User),@"D:\tasks\CarPool\Documents\users.json" },
+            {typeof(Offer), @"D:\tasks\CarPool\Documents\offers.json"},
+            {typeof(Booking),  @"D:\tasks\CarPool\Documents\bookings.json"},
+            {typeof(OfferRequest), @"D:\tasks\CarPool\Documents\offerRequests.json"},
+            {typeof(Payment), @"D:\tasks\CarPool\Documents\payments.json"},
+            {typeof(Location), @"D:\tasks\CarPool\Documents\locations.json"}
         };
 
         
@@ -50,7 +52,7 @@ namespace CarPool.Repository
         public List<T> GetList()
         {
             
-            GetDataFromJson(typeof(T));
+            GetDataFromJson();
             return objects;
         }
 
@@ -71,11 +73,10 @@ namespace CarPool.Repository
             Save();
         }
 
-        public List<T> GetDataFromJson(Type t)
+        public List<T> GetDataFromJson()
         {
-            string type = t.Name.ToString().ToUpper();
             string result;
-            ListOfPaths.TryGetValue(type, out result);
+            ListOfPaths.TryGetValue(typeof(T), out result);
             List<T> TObjects = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(result));
             return TObjects;
         }
@@ -84,7 +85,7 @@ namespace CarPool.Repository
         {
             string type = typeof(T).Name.ToString().ToUpper();
             string result;
-            ListOfPaths.TryGetValue(type, out result);
+            ListOfPaths.TryGetValue(typeof(T), out result);
 
             File.WriteAllText(result, JsonConvert.SerializeObject(objects));
         }

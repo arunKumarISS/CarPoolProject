@@ -1,0 +1,17 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ConsoleApp2/obj/Release/CarPool.Presentation.csprojAssemblyReference.cache
+/ConsoleApp2/obj/Debug/CarPool.Presentation.csprojAssemblyReference.cache
+/CarPoolProject/obj/Debug/CarPoolProject.csprojAssemblyReference.cache
+/CarPool.Database/obj/Release/CarPool.Database.csprojAssemblyReference.cache
+/CarPool.Database/obj/Debug/CarPool.Database.csprojAssemblyReference.cache
+/.vs/slnx.sqlite
+/.vs/ProjectSettings.json
+/.vs/CarPoolProject/v16/Server/sqlite3/storage.ide-wal
+/.vs/CarPoolProject/v16/Server/sqlite3/storage.ide-shm
+/.vs/CarPoolProject/v16/Server/sqlite3/storage.ide
+/.vs/CarPoolProject/v16/Server/sqlite3/db.lock
+/.vs/CarPoolProject/v16/.suo
+/.vs/CarpoolConsole/v16/.suo
