@@ -14,3 +14,7 @@ C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Repository\obj\Debug\CarPool
 C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Repository\obj\Debug\CarPool.Repository.csproj.CopyComplete
 C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Repository\obj\Debug\CarPool.Repository.dll
 C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Repository\obj\Debug\CarPool.Repository.pdb
+C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Repository\bin\Debug\EntityFramework.dll
+C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Repository\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Repository\bin\Debug\EntityFramework.xml
+C:\Users\arun.k\source\repos\CarPoolProject\CarPool.Repository\bin\Debug\EntityFramework.SqlServer.xml

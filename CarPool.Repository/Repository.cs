@@ -7,28 +7,36 @@ using System.IO;
 using CarPool.Model;
 using Newtonsoft.Json;
 using System.Reflection;
+using System.Data.Sql;
+using System.Data.SqlClient;
+using System.Data;
+using System.ComponentModel;
 
+//Data Source=DESKTOP-H7CBN3O;Initial Catalog=CarPool;Integrated Security=True
 
 namespace CarPool.Repository
 {
     public class Repository<T> : IRepository<T> where T : EntityBase
     {
+        SqlCommand Command;
+        SqlConnection Connection;
+        SqlDataAdapter Data;
         public static List<T> objects;
 
         public Repository()
         {
-            objects = GetDataFromJson(typeof(T));
+            objects = GetFromDatabase(typeof(T));
         }
 
 
         public static IDictionary<string, string> ListOfPaths = new Dictionary<string, string>()
         {
-            {"USER",@"D:\tasks\CarPool\Documents\users.json" },
-            {"OFFER", @"D:\tasks\CarPool\Documents\offers.json"},
-            {"BOOKING",  @"D:\tasks\CarPool\Documents\bookings.json"},
-            {"OFFERREQUEST", @"D:\tasks\CarPool\Documents\offerRequests.json"},
-            {"PAYMENT", @"D:\tasks\CarPool\Documents\payments.json"},
-            {"LOCATION", @"D:\tasks\CarPool\Documents\locations.json"}
+            {"USER","SELECT * FROM User" },
+            {"OFFER", "SELECT * FROM Offers"},
+            {"BOOKING",  "SELECT * FROM Bookings"},
+            {"OFFERREQUEST", "SELECT * FROM OfferRequests"},
+            {"PAYMENT", "SELECT * FROM Payments"},
+            {"LOCATION", "SELECT * FROM Locations"}
         };
 
         
@@ -36,13 +44,13 @@ namespace CarPool.Repository
 
         public void Add(T entity)
         {
+            
             objects.Add(entity);
             Save();
         }
 
         public void Delete(T entity)
         {
-            
             objects.Remove(entity);
             Save();
         }
@@ -50,7 +58,7 @@ namespace CarPool.Repository
         public List<T> GetList()
         {
             
-            GetDataFromJson(typeof(T));
+            
             return objects;
         }
 
@@ -71,14 +79,39 @@ namespace CarPool.Repository
             Save();
         }
 
-        public List<T> GetDataFromJson(Type t)
+        public List<T> GetFromDatabase(Type t)
         {
-            string type = t.Name.ToString().ToUpper();
-            string result;
-            ListOfPaths.TryGetValue(type, out result);
-            List<T> TObjects = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(result));
-            return TObjects;
+            //string type = t.Name.ToString().ToUpper();
+            //string result;
+            //ListOfPaths.TryGetValue(type, out result);
+
+            //var queryExample = context.BookingTables;
+            //Booking user = new Booking();
+            //var groups = context.OfferTables.ToList();
+            //return TObjects;
         }
+
+        //public DataTable ToDataTable(this List<T> data)
+        //{
+        //    PropertyDescriptorCollection props =
+        //        TypeDescriptor.GetProperties(typeof(T));
+        //    DataTable table = new DataTable();
+        //    for (int i = 0; i < props.Count; i++)
+        //    {
+        //        PropertyDescriptor prop = props[i];
+        //        table.Columns.Add(prop.Name, prop.PropertyType);
+        //    }
+        //    object[] values = new object[props.Count];
+        //    foreach (T item in data)
+        //    {
+        //        for (int i = 0; i < values.Length; i++)
+        //        {
+        //            values[i] = props[i].GetValue(item);
+        //        }
+        //        table.Rows.Add(values);
+        //    }
+        //    return table;
+        //}
 
         public void Save()
         {
@@ -88,5 +121,6 @@ namespace CarPool.Repository
 
             File.WriteAllText(result, JsonConvert.SerializeObject(objects));
         }
+
     }
 }

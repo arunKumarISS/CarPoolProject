@@ -65,11 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookingService.cs" />
-    <Compile Include="CarPoolDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CarPoolDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="LocationService.cs" />
     <Compile Include="OfferRequestService.cs" />
     <Compile Include="OfferService.cs" />
@@ -84,17 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="CarPoolDataSet.xsc">
-      <DependentUpon>CarPoolDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="CarPoolDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>CarPoolDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="CarPoolDataSet.xss">
-      <DependentUpon>CarPoolDataSet.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -114,15 +98,6 @@
       <Project>{88ddbe52-1f59-4898-8adc-764e7898aa59}</Project>
       <Name>CarPool.Repository</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="CarPool.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CarPool_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>CarPool.mdf</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

@@ -68,7 +68,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="images %281%29.jpg" />
+    <Content Include="images.jpg" />
     <Content Include="LoginSignup.aspx" />
+    <Content Include="StyleSheet1.css" />
+    <Content Include="unnamed.jpg" />
+    <Content Include="vikasProgram.PNG" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

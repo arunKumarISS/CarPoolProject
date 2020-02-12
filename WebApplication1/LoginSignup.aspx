@@ -1,20 +1,33 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LoginSignup.aspx.cs" Inherits="WebApplication1.LoginSignup" %>
+﻿<!DOCTYPE html>
+<html>
+<head>
+<style>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
+    body {
+        background: url("images%20(1).jpg");
+        background-size: 500px 500px;
+        background-repeat: no-repeat;
+        width: 553px;
+    }
+
+
+</style>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div>
-        </div>
-        <asp:TextBox ID="Username" runat="server"></asp:TextBox>
-        <p>
-            <asp:TextBox ID="Password" runat="server" TextMode="Password"></asp:TextBox>
-        </p>
-        <asp:Button ID="SubmitButton" runat="server" Text="submit" OnClick="SubmitButton_Click" />
-    </form>
+
+<h2></h2>
+<div id="example1">
+  <h2>Hello World</h2>
+</div>
+
+<h2></h2>
+<div id="example2">
+  <h2>Hello World</h2>
+  <p></p>
+</div>
+
+<p><strong>Note:</strong> </p>
+
 </body>
 </html>

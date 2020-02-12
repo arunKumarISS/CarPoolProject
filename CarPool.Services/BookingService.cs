@@ -119,7 +119,7 @@ namespace CarPool.Services
                     booking.Status = IEnums.BookingStatus.Cancelled;
                 }
             }
-        }
+        }       
 
         public List<string> GetPassengersInVehicle(string riderId)
         {

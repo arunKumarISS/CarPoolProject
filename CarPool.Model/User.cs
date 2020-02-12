@@ -21,5 +21,10 @@ namespace CarPool.Model
             Password = password;
             Wallet = 0;
         }
+
+        public User()
+        {
+
+        }
     }
 }

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CarPoolModelStoreContainer" CdmEntityContainer="CarPoolEntities">
+    <EntitySetMapping Name="BookingTables">
+      <EntityTypeMapping TypeName="CarPoolModel.BookingTable">
+        <MappingFragment StoreEntitySet="BookingTable">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+          <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+          <ScalarProperty Name="RideeId" ColumnName="RideeId" />
+          <ScalarProperty Name="RiderId" ColumnName="RiderId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Fiar" ColumnName="Fiar" />
+          <ScalarProperty Name="NumberOfPassengers" ColumnName="NumberOfPassengers" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LocationTables">
+      <EntityTypeMapping TypeName="CarPoolModel.LocationTable">
+        <MappingFragment StoreEntitySet="LocationTable">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OfferRequestTables">
+      <EntityTypeMapping TypeName="CarPoolModel.OfferRequestTable">
+        <MappingFragment StoreEntitySet="OfferRequestTable">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RiderId" ColumnName="RiderId" />
+          <ScalarProperty Name="RideeId" ColumnName="RideeId" />
+          <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+          <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="NumberOfPassengers" ColumnName="NumberOfPassengers" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OfferTables">
+      <EntityTypeMapping TypeName="CarPoolModel.OfferTable">
+        <MappingFragment StoreEntitySet="OfferTable">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="RiderId" ColumnName="RiderId" />
+          <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+          <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+          <ScalarProperty Name="Availability" ColumnName="Availability" />
+          <ScalarProperty Name="VehicleRegNumber" ColumnName="VehicleRegNumber" />
+          <ScalarProperty Name="VehicleModel" ColumnName="VehicleModel" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentTables">
+      <EntityTypeMapping TypeName="CarPoolModel.PaymentTable">
+        <MappingFragment StoreEntitySet="PaymentTable">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RiderId" ColumnName="RiderId" />
+          <ScalarProperty Name="RideeId" ColumnName="RideeId" />
+          <ScalarProperty Name="Fair" ColumnName="Fair" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTables">
+      <EntityTypeMapping TypeName="CarPoolModel.UserTable">
+        <MappingFragment StoreEntitySet="UserTable">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Wallet" ColumnName="Wallet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViaPointsTables">
+      <EntityTypeMapping TypeName="CarPoolModel.ViaPointsTable">
+        <MappingFragment StoreEntitySet="ViaPointsTable">
+          <ScalarProperty Name="OfferId" ColumnName="OfferId" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

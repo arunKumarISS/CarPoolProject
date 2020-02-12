@@ -5,10 +5,12 @@ using CarPool.Model;
 using CarPool.Enums;
 using CarPool.Repository;
 
+
 namespace CarPool.Services
 {
     public class OfferService
     {
+        
         Repository<Offer> offerRepository = new Repository<Offer>();
         Repository<Location> locationRepository = new Repository<Location>();
         public Offer CreateOffer(string driverName, string userId, Location fromLocation, Location toLocation, int availability, string vehicleRegNumber, string vehicleModel)
